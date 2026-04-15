@@ -23,7 +23,6 @@ export default defineConfig({
 
   use: {
     baseURL,
-    storageState: 'e2e/fixtures/.auth-state.json',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'on-first-retry',
@@ -95,6 +94,7 @@ export default defineConfig({
       name: 'baseline',
       testMatch: ['recorded-flow-v1.spec.ts', 'recorded-flow-en.spec.ts', 'ENDOFOWORLD.spec.ts', 'ENDOFOWORLD_NL.spec.ts'],
       timeout: 600_000,
+      use: { storageState: 'e2e/fixtures/.auth-state.json' },
       dependencies: ['setup'], // Re-enabled: ensures fresh auth token before each baseline run
     },
   ],
