@@ -9,6 +9,7 @@ const baseURL = process.env.E2E_BASE_URL || 'https://staging-demo.vacaturetovena
 
 export default defineConfig({
   testDir: './e2e/tests',
+  testIgnore: '**/archived/**',
   fullyParallel: false, // Enforce sequential execution for UAT to prevent state collisions
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
