@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-headline: "Manrope", sans-serif;
+
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-surface: var(--background);
+  --color-on-surface: var(--foreground);
+  --color-on-surface-variant: var(--text-muted);
+  --color-secondary-container: #aeece1;
+  --color-on-secondary-container: #2f6c64;
+  --color-primary-container: #0f1c2c;
+  --color-on-primary-container: #778598;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0f172a;
+    --primary: #10b981;
+    --secondary: #334155;
+    --text-muted: #64748b;
+  }
+
+  .dark {
+    --background: #0b0f1a;
+    --foreground: #f8fafc;
+    --primary: #10b981;
+    --secondary: #94a3b8;
+    --text-muted: #94a3b8;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-slate-800/20;
+  }
+  
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    font-size: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white font-bold rounded-xl px-6 py-3 transition-all active:scale-95 shadow-lg shadow-primary/10 hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white font-bold rounded-xl px-6 py-3 transition-all active:scale-95 shadow-lg shadow-secondary/10 hover:opacity-90;
+  }
+}
+
+body {
+  @apply bg-surface text-on-surface font-sans antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-headline tracking-tight;
+}
+
+/* Transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Pulsing dot for live runs */
+@keyframes pulse-red {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.pulse-dot {
+  @apply w-2.5 h-2.5 bg-red-500 rounded-full inline-block;
+  animation: pulse-red 2s infinite;
+}

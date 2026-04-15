@@ -1,0 +1,130 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  engineType      = "wasm"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TestSuite {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  isCustom    Boolean  @default(false)
+  testCases   Json     @default("[]") // Array of strings/test IDs
+  createdBy   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  runs      TestRun[]
+  schedules TestSchedule[]
+}
+
+model TestRun {
+  id            String    @id @default(cuid())
+  name          String?
+  suiteId       String?
+  environment   String?
+  status        String    @default("running") // running|passed|failed|flaky
+  triggeredBy   String?
+  triggerType   String?   @default("manual") // pr|push|schedule|manual
+  context       String?   @default("regression") // new_feature|regression|daily
+  startedAt     DateTime  @default(now())
+  completedAt   DateTime?
+  totalTests    Int       @default(0)
+  passed        Int       @default(0)
+  failed        Int       @default(0)
+  skipped       Int       @default(0)
+  duration      Int       @default(0) // in seconds
+  branch        String?
+  commitSha     String?
+  
+  suite         TestSuite? @relation(fields: [suiteId], references: [id])
+  results       TestResult[]
+  qualityScores AiQualityScore[]
+}
+
+model TestResult {
+  id              String   @id @default(cuid())
+  runId           String
+  testId          String?
+  name            String
+  file            String?
+  suiteName       String?
+  status          String   // passed|failed|skipped|flaky
+  duration        Int      @default(0)
+  errorMessage    String?  @db.Text
+  errorStack      String?  @db.Text
+  category        String?  // REGRESSION|FLAKE|ENV_ISSUE|AI_DRIFT|SECURITY
+  aiTriageReason  String?  @db.Text
+  retryCount      Int      @default(0)
+  
+  run             TestRun @relation(fields: [runId], references: [id])
+}
+
+model TestSchedule {
+  id             String    @id @default(cuid())
+  name           String
+  cronExpression String
+  suiteId        String
+  environment    String?   @default("staging")
+  context        String?   @default("regression") // regression|daily
+  nextRunAt      DateTime?
+  isActive       Boolean   @default(true)
+  createdBy      String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  suite          TestSuite @relation(fields: [suiteId], references: [id])
+}
+
+model AiQualityScore {
+  id                    String   @id @default(cuid())
+  runId                 String
+  timestamp             DateTime @default(now())
+  overallScore          Float
+  languageNaturalness   Float
+  roleConsistency       Float
+  toneAndBranding       Float
+  sectionCompleteness   Float
+  hallucinationScore    Float
+  marketAlignment       Float
+  hallucinationsDetected Int      @default(0)
+  injectionBlocked      Int      @default(0)
+  rawReport             Json?
+
+  run                   TestRun @relation(fields: [runId], references: [id])
+}
+
+model ReleaseGate {
+  id            String   @id @default(cuid())
+  name          String
+  category      String   // Functional, AI, Security, Perf, A11y
+  description   String?
+  required      Boolean  @default(true)
+  status        String   @default("skip") // pass|fail|warn|skip
+  detail        String?
+  lastCheckedAt DateTime @default(now())
+}
+
+model FlakynessRecord {
+  id           String   @id @default(cuid())
+  testId       String   @unique
+  testName     String
+  suiteName    String?
+  runCount     Int      @default(0)
+  failCount    Int      @default(0)
+  flakinessRate Float    @default(0)
+  lastFailedAt  DateTime?
+  trend        Json?    // Array of recent statuses
+}
+
+model GlobalSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}

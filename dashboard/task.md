@@ -1,0 +1,8 @@
+- [x] Extend Database Schema (`prisma/schema.prisma`)
+- [x] Implement Scheduling Logic (`src/lib/scheduler.ts`)
+- [x] Integrate Scheduler with App Lifecycle (`src/instrumentation.ts`)
+- [x] Update API Layer (`/api/suites`)
+- [x] Implement Background Execution logic
+- [x] Enhance Dashboard UI for Scheduling (`SuiteCombinator.tsx`, `suites/page.tsx`)
+- [x] Port app to 3100 as default
+- [/] Verification & QA Testing
