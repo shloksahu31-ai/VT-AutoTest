@@ -1,0 +1,13 @@
+node_modules/
+.env*
+!.env.e2e.example
+e2e/fixtures/.auth-state.json
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+error.log
+*.zip
+extracted_files/
+.vscode/
+.idea/

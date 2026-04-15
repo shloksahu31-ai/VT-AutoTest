@@ -1,0 +1,20 @@
+﻿[VERIFY] Logging in...
+[VERIFY] Logged in. URL: https://uat-demo.vacaturetovenaar.nl/
+
+=== JOYRIDE STATUS ===
+  Portal in DOM: false
+  Portal intercepts events: false
+  Portal visible: false
+  CSS injected: false
+
+Γ£à JOYRIDE NEUTRALIZED (invisible + non-interactive)
+
+=== INTERACTION TEST ===
+  Γ£à "Nieuwe Vacature Maken" clicked
+  Γ£à Company dropdown opened
+  Γ£à Company option selected (no force: true!)
+  Γ£à Job title filled
+  Γ£à Vacancy type selected (no force: true!)
+  Γ£à Submit button enabled: true
+
+[VERIFY] Done.

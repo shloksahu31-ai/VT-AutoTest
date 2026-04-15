@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-02-11",
+  "description": "Baseline quality thresholds for AI intake responses. Tests fail if any score drops below these.",
+  "thresholds": {
+    "responseRelevance": 7,
+    "dataExtractionAccuracy": 7,
+    "conversationHelpfulness": 7,
+    "dutchLanguageQuality": 7,
+    "overallMinimum": 7
+  },
+  "notes": {
+    "responseRelevance": "Does the AI response directly address the job description provided?",
+    "dataExtractionAccuracy": "Are job title, skills, location, salary etc. correctly extracted?",
+    "conversationHelpfulness": "Does the AI ask useful follow-up questions? Is it guiding the user?",
+    "dutchLanguageQuality": "For Dutch inputs: is the Dutch natural and professional?",
+    "overallMinimum": "The absolute minimum score any category can have"
+  }
+}

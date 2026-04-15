@@ -1,0 +1,527 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\playwright.config.ts",
+    "rootDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "global-setup.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "smoke",
+        "name": "smoke",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "uat-smoke.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "auth",
+        "name": "auth",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "auth.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "dashboard",
+        "name": "dashboard",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "dashboard.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "intake-flow",
+        "name": "intake-flow",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "intake-flow.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "intake-api",
+        "name": "intake-api",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "intake-api.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "intake-quality",
+        "name": "intake-quality",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "intake-quality.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "vacancy-writer",
+        "name": "vacancy-writer",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "vacancy-writer.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "full-flow",
+        "name": "full-flow",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "full-flow.spec.ts"
+        ],
+        "timeout": 600000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "happy-path",
+        "name": "happy-path",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/happy-path.spec.ts|final-comprehensive-flow.spec.ts/"
+        ],
+        "timeout": 900000
+      },
+      {
+        "outputDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "baseline",
+        "name": "baseline",
+        "testDir": "C:/Users/shlok/Desktop/Work/Vacature Tovenaar/vacature-tovenaar-testing/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "recorded-flow-v1.spec.ts",
+          "recorded-flow-en.spec.ts",
+          "ENDOFOWORLD.spec.ts",
+          "ENDOFOWORLD_NL.spec.ts"
+        ],
+        "timeout": 600000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "e2e/results/test-results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "global-setup.ts",
+      "file": "global-setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "authenticate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "setup",
+              "projectName": "setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13004,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[Setup] Authenticating: https://uat-demo.vacaturetovenaar.nl/login\n"
+                    },
+                    {
+                      "text": "[Setup] Authentication successful. State saved to: C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\fixtures\\.auth-state.json\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-15T11:42:23.508Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "13722ad43cd6b8b1aa42-e8c8e49b686d9f6bb558",
+          "file": "global-setup.ts",
+          "line": 7,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "ENDOFOWORLD_NL.spec.ts",
+      "file": "ENDOFOWORLD_NL.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "E2E Definitive Flow (NL) - Sales Support Representative",
+          "file": "ENDOFOWORLD_NL.spec.ts",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Execute Complete Flow",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "baseline",
+                  "projectName": "baseline",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 334366,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[INTAKE] Found 18 question triggers to answer.\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q1\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q2\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q3\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q4\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q5\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q6\n"
+                        },
+                        {
+                          "text": "[INTAKE] Q7 — no empty textarea found\n"
+                        },
+                        {
+                          "text": "[INTAKE] Q8 — no empty textarea found\n"
+                        },
+                        {
+                          "text": "[INTAKE] Q9 — no empty textarea found\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q10\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q11\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q12\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q13\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q14\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q15\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q16\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q17\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q18\n"
+                        },
+                        {
+                          "text": "[INTAKE] Final progress: unknown\n"
+                        },
+                        {
+                          "text": "[BASELINE-COMPLETE] End of World Flow (NL) completed.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-15T11:42:38.219Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "dce34f075429c4c4dbaa-d0d978e745c09dc3168f",
+              "file": "ENDOFOWORLD_NL.spec.ts",
+              "line": 18,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ENDOFOWORLD.spec.ts",
+      "file": "ENDOFOWORLD.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "E2E Definitive Flow (EN) - Sales Support Representative",
+          "file": "ENDOFOWORLD.spec.ts",
+          "line": 10,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Execute Complete Flow",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "baseline",
+                  "projectName": "baseline",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 271911,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Dashboard is in Dutch. Toggling to English...\n"
+                        },
+                        {
+                          "text": "[INTAKE] Found 18 question triggers to answer.\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q1\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q2\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q3\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q4\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q5\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q6\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q7\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q8\n"
+                        },
+                        {
+                          "text": "[INTAKE] Q9 — no empty textarea found (may already be answered or panel didn't open)\n"
+                        },
+                        {
+                          "text": "[INTAKE] Q10 — no empty textarea found (may already be answered or panel didn't open)\n"
+                        },
+                        {
+                          "text": "[INTAKE] Q11 — no empty textarea found (may already be answered or panel didn't open)\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q12\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q13\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q14\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q15\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q16\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q17\n"
+                        },
+                        {
+                          "text": "[INTAKE] Answered Q18\n"
+                        },
+                        {
+                          "text": "[INTAKE] Final progress: You have 4 unanswered question(s). Do you still want to submit?\n"
+                        },
+                        {
+                          "text": "[BASELINE-COMPLETE] End of World Flow completed.\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "[INTAKE] WARNING: Not all questions answered — clicking Submit Anyway\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2026-04-15T11:48:13.065Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "eef68697d58d42cfcc81-7dc978577b1e6039100d",
+              "file": "ENDOFOWORLD.spec.ts",
+              "line": 17,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-04-15T11:42:22.202Z",
+    "duration": 623134.3509999999,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

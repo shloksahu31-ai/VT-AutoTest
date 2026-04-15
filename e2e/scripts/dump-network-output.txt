@@ -1,0 +1,38 @@
+﻿[DUMP] Logged in. URL: https://uat-demo.vacaturetovenaar.nl/
+
+=== TOUR-RELATED NETWORK REQUESTS ===
+
+=== ALL FETCH/XHR CALLS ===
+  https://uat-demo.vacaturetovenaar.nl/cdn-cgi/rum?
+  https://uat-api.vacaturetovenaar.nl/api/public/theme/uat-demo
+  https://uat-api.vacaturetovenaar.nl/api/tenants/uat-demo/language?clientSessionId=1775981135709_fb1kilksd
+  https://j.clarity.ms/collect
+  https://us.i.posthog.com/flags/?v=2&config=true&ip=0&_=1775981136631&ver=1.290.0&compression=base64
+  https://j.clarity.ms/collect
+  https://uat-api.vacaturetovenaar.nl/api/auth/login
+  https://uat-demo.vacaturetovenaar.nl/?_rsc=5c339
+  https://j.clarity.ms/collect
+  https://j.clarity.ms/collect
+  https://uat-api.vacaturetovenaar.nl/api/auth/me
+  https://uat-api.vacaturetovenaar.nl/api/tenants/subscription
+  https://uat-api.vacaturetovenaar.nl/api/auth/me
+  https://uat-api.vacaturetovenaar.nl/api/agency/tree
+  https://uat-api.vacaturetovenaar.nl/api/tenant-admin/companies/list
+  https://uat-api.vacaturetovenaar.nl/api/agency/workflows?limit=10&sortBy=updatedAt&currentUserOnly=true
+  https://uat-api.vacaturetovenaar.nl/api/agency/stats
+  https://uat-api.vacaturetovenaar.nl/api/agency/workflows?limit=1&sortBy=updatedAt&currentUserOnly=true
+  https://uat-api.vacaturetovenaar.nl/api/tenants/subscription
+  https://uat-demo.vacaturetovenaar.nl/recruit/standalone?_rsc=1r34m
+  https://uat-demo.vacaturetovenaar.nl/?_rsc=1r34m
+  https://uat-demo.vacaturetovenaar.nl/?_rsc=1pn8p
+  https://uat-demo.vacaturetovenaar.nl/?_rsc=nn07o
+  https://uat-demo.vacaturetovenaar.nl/?_rsc=ivliq
+  https://uat-demo.vacaturetovenaar.nl/recruit/standalone?_rsc=1pn8p
+  https://uat-demo.vacaturetovenaar.nl/recruit/standalone?_rsc=uao77
+  https://j.clarity.ms/collect
+
+=== JOYRIDE-RELATED SCRIPTS ===
+
+=== INLINE SCRIPTS WITH JOYRIDE ===
+
+[DUMP] Done.

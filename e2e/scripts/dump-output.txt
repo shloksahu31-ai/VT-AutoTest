@@ -1,0 +1,29 @@
+﻿[DUMP] Navigating to login...
+[DUMP] Logged in. URL: https://uat-demo.vacaturetovenaar.nl/
+
+=== LOCAL STORAGE KEYS ===
+  tenant = {"id":"cmfw16my6000odz9wgj2rcumm","name":"Rijkswaterstaat - 1","subdomain":"uat-demo","subscriptionTier":"ENTERPRISE","tenantType":"INDIVIDUAL","isActive":true,"settings":{"theme":{"logo":{},"colors":...
+  isLoggedIn = true
+  ph_phc_LfliWfVpYDD0pm2bKBmwpIXft7lxIp9UjNWsc1hwZLf_posthog = {"$initialization_time":"2026-04-12T08:04:17.153Z","$configured_session_timeout_ms":1800000,"distinct_id":"019d80b8-548d-7ebe-b13f-5b92c5e347f7","$device_id":"019d80b8-548d-7ebe-b13f-5b92c5e347f7","$u...
+  user = {"id":23,"email":"shlok@example.com","firstName":"Shlok","lastName":"Sahu","role":"TENANT_ADMIN","isActive":true,"isAnonymous":false,"tenantId":"cmfw16my6000odz9wgj2rcumm","emailVerified":false,"email...
+  vacatureLanguage = nl
+
+=== JOYRIDE STATUS ===
+  Portal exists: true
+  Portal HTML: <div aria-hidden="true" class="react-joyride__overlay" data-testid="overlay" style="height: 785px; pointer-events: none; inset: 0px; overflow: hidden; position: absolute; z-index: 10000;"><svg class="react-joyride__spotlight" data-testid="spotlight" style="height: 785px; left: 0px; position: absolute; top: 0px; width: 1280px;"><path d="M0 0H1280V785H0Z M1064 383H1254A12 12 0 0 1 1266 395V427A12 12 0 0 1 1254 439H1064A12 12 0 0 1 1052 427V395A12 12 0 0 1 1064 383Z" fill="rgba(0, 0, 0, 0.5)" fill-
+  Joyride elements: 5
+  Shepherd elements: 0
+
+=== SESSION STORAGE KEYS ===
+  ph_phc_LfliWfVpYDD0pm2bKBmwpIXft7lxIp9UjNWsc1hwZLf_window_id = "019d80b8-5999-74c6-aa20-05c017d9c603"
+  vacature_client_session_id = 1775981054660_s15p87cyx
+  ph_phc_LfliWfVpYDD0pm2bKBmwpIXft7lxIp9UjNWsc1hwZLf_posthog = {"$sdk_debug_extensions_init_method":"synchronous","$sdk_debug_extensions_init_time_ms":6,"$sdk_debug_replay_remote_trigger_matching_config":null,"$sdk_debug_replay_event_trigger_status":"trigger_disa...
+  ph_phc_LfliWfVpYDD0pm2bKBmwpIXft7lxIp9UjNWsc1hwZLf_primary_window_exists = true
+  _cltk = yvukkf
+
+=== TOUR-RELATED KEYS (filtered) ===
+
+=== COOKIES (tour-related) ===
+  Total cookies: 13
+
+[DUMP] Done.
