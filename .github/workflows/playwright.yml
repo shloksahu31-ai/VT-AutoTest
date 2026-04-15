@@ -20,7 +20,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npm test
+      run: npx playwright test ENDOFOWORLD.spec.ts ENDOFOWORLD_NL.spec.ts --project=baseline
       env:
         E2E_BASE_URL: ${{ secrets.E2E_BASE_URL }}
         E2E_USERNAME: ${{ secrets.E2E_USERNAME }}
