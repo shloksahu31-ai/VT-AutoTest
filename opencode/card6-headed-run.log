@@ -1,8 +1,0 @@
-﻿[dotenv@17.3.1] injecting env (6) from .env.e2e -- tip: ΓÜÖ∩╕Å  override existing env vars with { override: true }
-
-Running 1 test using 1 worker
-
-[dotenv@17.3.1] injecting env (0) from .env.e2e -- tip: ΓÜÖ∩╕Å  specify custom .env file path with { path: '/custom/path/.env' }
-  ok 1 opencode\card6-functional.spec.ts:96:5 ΓÇ║ [TC-C6-01] Free-chat happy path: dark card to bare /recruit sparring answer (11.2s)
-
-  1 passed (13.1s)
