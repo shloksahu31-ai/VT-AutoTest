@@ -1,0 +1,458 @@
+[
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-back",
+    "selector": "/choose/findCandidates >> button:has-text(\"Terug\")",
+    "label": "NL=Terug | EN=Back",
+    "action": "click",
+    "expectedResult": "router.push('/') back to situation dashboard"
+  },
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-title",
+    "selector": "/choose/findCandidates >> h1",
+    "label": "NL=Hoe pak je de werving aan?",
+    "action": "assert text redesign.v2.intermediate.findCandidates.title",
+    "expectedResult": "title rendered from locale"
+  },
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-subtitle",
+    "selector": "/choose/findCandidates >> h1 + p",
+    "label": "NL=Zelf kandidaten benaderen of ze naar je vacature trekken…",
+    "action": "assert text redesign.v2.intermediate.findCandidates.subtitle",
+    "expectedResult": "subtitle rendered from locale"
+  },
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-option-publish",
+    "selector": "a.situation-card[data-option=\"publish\"]",
+    "label": "NL eyebrow=Zij vinden jou / title=Plaatsen & adverteren",
+    "action": "click — Option B for Card 3B",
+    "expectedResult": "recordEntranceChoice fork(findCandidates/publish) then navigate to /recruit?route=publish-and-advertise"
+  },
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-option-publish-meta",
+    "selector": "a.situation-card[data-option=\"publish\"] >> meta line",
+    "label": "NL=Levert op: kanaalkeuze + boodschap en meetpunt per kanaal, in een briefing die je kunt delen",
+    "action": "assert text options.publish.meta",
+    "expectedResult": "meta line with check icon rendered"
+  },
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-option-publish-description",
+    "selector": "a.situation-card[data-option=\"publish\"] >> description",
+    "label": "NL=Waar zit je doelgroep, wat beweegt hem en welke boodschap werkt daar…",
+    "action": "assert text options.publish.description",
+    "expectedResult": "description rendered from locale"
+  },
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-option-sourcing-sibling",
+    "selector": "a.situation-card[data-option=\"sourcing\"]",
+    "label": "NL eyebrow=Benader kandidaten zelf / title=Sourcing",
+    "action": "assert present but OUT OF SCOPE for Card 3B (do not click)",
+    "expectedResult": "href=/recruit?route=going-to-source; sibling proving fork differs"
+  },
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-option-gate",
+    "selector": "div[data-option] (non-link fallback)",
+    "label": "unclickable tile when situationHref returns null",
+    "action": "assert absent for sourcing/publish (both routes available)",
+    "expectedResult": "both options render as <Link>"
+  },
+  {
+    "screen": "choose-findCandidates",
+    "elementId": "choose-unknown-situation",
+    "selector": "/choose/<unknown>",
+    "label": "unknown situation key guard",
+    "action": "open unknown situation directly",
+    "expectedResult": "router.replace('/') and renders null"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-headline",
+    "selector": "main h1",
+    "label": "NL=Laten we bepalen waar deze vacature terechtkomt.",
+    "action": "assert text on entry /recruit?route=publish-and-advertise",
+    "expectedResult": "route-specific headline; generic fallback only if key missing"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-subheadline",
+    "selector": "main p",
+    "label": "NL=Plak de vacature en je krijgt een kanaalmix, een budget en de boodschap die per kanaal thuishoort.",
+    "action": "assert text",
+    "expectedResult": "route-specific subheadline rendered"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-textarea",
+    "selector": "[data-tour=\"standalone-input\"] textarea",
+    "label": "placeholder NL=Plak de vacature die je wilt uitzetten…",
+    "action": "fill vacancy text",
+    "expectedResult": "value set; submit enables (disabled while empty)"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-submit",
+    "selector": "[data-tour=\"standalone-input\"] button[type=\"submit\"]",
+    "label": "NL=Verstuur/Spar",
+    "action": "click (Enter without Shift also submits)",
+    "expectedResult": "startRouteFlow: POST /api/recruitment-advice/route step 0 (channel-plan); ack then clarifier speed/budget"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-submit-gate",
+    "selector": "[data-tour=\"standalone-input\"] button[type=\"submit\"]:disabled",
+    "label": "conditional enable: disabled when empty / isLoading / uploading / double-click guard",
+    "action": "assert disabled with empty textarea; assert enabled after fill",
+    "expectedResult": "disabled while empty/loading/uploading; submittingRef blocks double-click"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-attach",
+    "selector": "[data-tour=\"standalone-input\"] button[aria-label=\"Bestanden toevoegen\"]",
+    "label": "attach files (max 5 per message)",
+    "action": "click → file picker",
+    "expectedResult": "pending attachment chips; submit blocked while uploading"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-contextbar",
+    "selector": "[data-testid=\"recruit-context-bar\"]",
+    "label": "company context bar above composer",
+    "action": "assert visible; company picker depends on prospect gating",
+    "expectedResult": "context bar shown; picker hidden only if prospectRouteIds includes publish-and-advertise"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-no-build-cta",
+    "selector": "[data-tour=\"standalone-suggest\"]",
+    "label": "direct doelgroepanalyse CTA (ABSENT on cards)",
+    "action": "assert absent when ?route=publish-and-advertise present",
+    "expectedResult": "onBuildAnalysis=undefined for routeId; no detour CTA"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-no-modetabs",
+    "selector": "button sparring / title-check / analysis tabs",
+    "label": "assistant mode tabs (ABSENT on cards)",
+    "action": "assert absent when ?route= present",
+    "expectedResult": "mode tab row only when !routeId"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-examples",
+    "selector": "example prompts under landing (3 authored)",
+    "label": "NL e.g. Medior Java developer Eindhoven budget €1.500; IC-verpleegkundige Utrecht; Magazijnmedewerkers Venlo",
+    "action": "optional click to prefill",
+    "expectedResult": "prefills composer; recruiter still submits manually"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "carried-seed-receipt",
+    "selector": "[data-tour=\"standalone-input\"] textarea, [data-tour=\"recruit-chat-input\"] textarea",
+    "label": "card-to-card carried vacancy + receipt note (sessionStorage carrier)",
+    "action": "arrive via onward handoff from another card; assert seeded once",
+    "expectedResult": "seededInput seeds composer ONCE; cleared via onInputSeeded/clearRouteSession"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-remount-key",
+    "selector": "/recruit?route=publish-and-advertise (client nav from another card)",
+    "label": "card-to-card remount guard",
+    "action": "navigate from another ?route= card without reload",
+    "expectedResult": "RecruitStandalone key={routeId} remounts; previous card state cleared"
+  },
+  {
+    "screen": "recruit-route-landing",
+    "elementId": "route-landing-validation",
+    "selector": "text=Plak eerst je vacaturetekst voordat je de analyse start.",
+    "label": "validation.emptyVacancy toast/inline (requiresVacancy=true)",
+    "action": "attempt submit empty / title-only probe (record-only)",
+    "expectedResult": "blocked with validation.emptyVacancy; title-only probe recorded not asserted"
+  },
+  {
+    "screen": "recruit-clarifier",
+    "elementId": "clarifier-ack",
+    "selector": "main >> route ack bubble",
+    "label": "NL=Ik heb je vacature. Twee korte vragen en ik kan je zeggen waar hij moet staan en wat hij daar moet zeggen.",
+    "action": "assert visible after submit",
+    "expectedResult": "routeAcks.publish-and-advertise then first question appears after dwell"
+  },
+  {
+    "screen": "recruit-clarifier",
+    "elementId": "clarifier-progress",
+    "selector": "text=Vraag 1 van 2",
+    "label": "clarifier.progress Vraag {{current}} van {{total}}",
+    "action": "assert on each question bubble caption",
+    "expectedResult": "QUESTION X OF N caption; total=2 (maxQuestions 2)"
+  },
+  {
+    "screen": "recruit-clarifier",
+    "elementId": "clarifier-pills-speed",
+    "selector": "[data-testid=\"clarifier-pill\"] pills row (single-select: click IS submit)",
+    "label": "speed: NL=Hoe snel moet dit ingevuld zijn? Gisteren / Binnen een maand of twee / Geen harde deadline",
+    "action": "click pill (reuse pill-loop.ts with per-card guard; do NOT duplicate loop)",
+    "expectedResult": "handleClarifierAnswer advances; re-resolve asks only outstanding (budget)"
+  },
+  {
+    "screen": "recruit-clarifier",
+    "elementId": "clarifier-pills-budget",
+    "selector": "[data-testid=\"clarifier-pill\"] pills row (single-select: click IS submit)",
+    "label": "budget: NL=Is er budget voor promotie? Geen budget / Een klein bedrag / Echt budget beschikbaar",
+    "action": "click pill",
+    "expectedResult": "second answer completes clarifier; channel-plan turn fires"
+  },
+  {
+    "screen": "recruit-clarifier",
+    "elementId": "clarifier-no-confirm",
+    "selector": "[data-testid=\"clarifier-confirm\"]",
+    "label": "Ga verder confirm (ABSENT here)",
+    "action": "assert absent for publish-and-advertise",
+    "expectedResult": "both preQuestions lack multiple:true so single-select; no Ga verder confirm"
+  },
+  {
+    "screen": "recruit-clarifier",
+    "elementId": "clarifier-free-input",
+    "selector": "clarifier bottom textarea[placeholder=\"Typ je antwoord of kies een optie hierboven…\"]",
+    "label": "clarifier.inputPlaceholder",
+    "action": "fill + Enter/click send",
+    "expectedResult": "same as pill click (label=value fallback)"
+  },
+  {
+    "screen": "recruit-clarifier",
+    "elementId": "clarifier-typing",
+    "selector": "typing dots bubble (awaiting=true)",
+    "label": "loading: pulsed dots + hidden pills",
+    "action": "observe after submit/answer",
+    "expectedResult": "typing indicator; pills hidden until questionPosted"
+  },
+  {
+    "screen": "recruit-clarifier",
+    "elementId": "clarifier-collapse-toggle",
+    "selector": "button:has-text(\"Meer tonen\"), button:has-text(\"Minder tonen\")",
+    "label": "showMore/showLess on pasted vacancy (>300 chars)",
+    "action": "click to expand/collapse",
+    "expectedResult": "paste truncates at 300 chars with toggle"
+  },
+  {
+    "screen": "recruit-chat-step",
+    "elementId": "step-answer-turn",
+    "selector": "assistant step answer bubble in thread",
+    "label": "backend-resolved step answer for publish-and-advertise (1 authored step: channel-plan)",
+    "action": "assert visible after clarifier completion",
+    "expectedResult": "three guided moves (channel+message+source per move); deepen block may appear"
+  },
+  {
+    "screen": "recruit-chat-step",
+    "elementId": "step-no-next-action",
+    "selector": "next-step card button in RecruitmentChatPanel (nextStepAction)",
+    "label": "stepCtas for publish-and-advertise (ABSENT)",
+    "action": "assert absent",
+    "expectedResult": "no route.stepCtas.publish-and-advertise entry; single-step stopAfter=true so no advance offer"
+  },
+  {
+    "screen": "recruit-chat-step",
+    "elementId": "step-title-caption",
+    "selector": "step title caption",
+    "label": "NL=Waar deze vacature terechtkomt",
+    "action": "assert text on step caption/restore",
+    "expectedResult": "backend step title preferred; locale only as fallback"
+  },
+  {
+    "screen": "recruit-chat-step",
+    "elementId": "deepen-block",
+    "selector": "deepen card (deepenAction) Haal meer uit deze stap",
+    "label": "NL=Haal meer uit deze stap + 1..3 question buttons",
+    "action": "click a deepen question",
+    "expectedResult": "same-step follow-up turn; row consumes; hidden while isLoading"
+  },
+  {
+    "screen": "recruit-chat-step",
+    "elementId": "dashboard-panel",
+    "selector": "[data-tour=\"recruit-advice-panel\"] beside chat (Kanalen/Channels tab)",
+    "label": "dashboard destination kind=dashboard tab=channels on channel-plan",
+    "action": "assert after channel-plan turn lands",
+    "expectedResult": "split view opens, Channels tab active; chat stays usable; one-shot per step"
+  },
+  {
+    "screen": "recruit-chat-step",
+    "elementId": "dashboard-tabs",
+    "selector": "[data-tour=\"recruit-tabs-bar\"] >> role=tab",
+    "label": "tabs Salaris, Doelgroep, Concurrentie, Kanalen, Budget & Tijd",
+    "action": "assert Channels active first; optional click other tabs",
+    "expectedResult": "Kanalen tab selected on open; other tabs switch content without rebuild"
+  },
+  {
+    "screen": "recruit-chat",
+    "elementId": "chat-composer-textarea",
+    "selector": "[data-tour=\"recruit-chat-input\"] textarea",
+    "label": "placeholder NL=Ga verder met het gesprek... / Stel een vraag over de strategie...",
+    "action": "fill + Enter (no Shift) or send button",
+    "expectedResult": "handleSendMessage; user bubble drawn"
+  },
+  {
+    "screen": "recruit-chat",
+    "elementId": "chat-send",
+    "selector": "[data-tour=\"recruit-chat-input\"] button send",
+    "label": "send (Spar/Verstuur)",
+    "action": "click; assert disabled when empty/loading/inputDisabled/uploading",
+    "expectedResult": "disabled when empty/loading; spinner while streaming"
+  },
+  {
+    "screen": "recruit-chat",
+    "elementId": "chat-composer-lock",
+    "selector": "[data-tour=\"recruit-chat-input\"]",
+    "label": "conditional enable: inputDisabled during generation (409 guard)",
+    "action": "assert disabled during generation",
+    "expectedResult": "composer disabled while generating; send blocked"
+  },
+  {
+    "screen": "recruit-chat",
+    "elementId": "chat-attach",
+    "selector": "[data-tour=\"recruit-chat-input\"] button[aria-label=\"Bestanden toevoegen\"]",
+    "label": "attach (max 5)",
+    "action": "click",
+    "expectedResult": "file picker; chips with remove buttons"
+  },
+  {
+    "screen": "recruit-chat",
+    "elementId": "chat-saved-prompts",
+    "selector": "[data-testid=\"my-prompts-trigger\"]",
+    "label": "Mijn prompts",
+    "action": "click → insert prompt into composer",
+    "expectedResult": "fills composer only; recruiter still sends"
+  },
+  {
+    "screen": "recruit-chat",
+    "elementId": "chat-suggestions-absent",
+    "selector": "[data-tour=\"recruitment-suggested-questions\"]",
+    "label": "follow-up pills tray (ABSENT inside cards)",
+    "action": "assert absent while routeId set",
+    "expectedResult": "no suggestion pills; deepen block is the only next-questions UI"
+  },
+  {
+    "screen": "recruit-chat",
+    "elementId": "chat-resize-handle",
+    "selector": "ResizeHandle between chat and dashboard",
+    "label": "Chat vergroten of verkleinen",
+    "action": "drag divider (desktop only; only when dashboard visible)",
+    "expectedResult": "chat width persists; dashboard floor 460px respected"
+  },
+  {
+    "screen": "recruit-chat",
+    "elementId": "chat-collapse-dashboard",
+    "selector": "button[aria-label=\"Sluit dashboard\" / \"Toon dashboard\"]",
+    "label": "advicePanel.collapse/expand (only when dashboard visible)",
+    "action": "click to collapse/expand advice panel",
+    "expectedResult": "chat takes flex-1 when collapsed"
+  },
+  {
+    "screen": "recruit-onward",
+    "elementId": "onward-intro-absent",
+    "selector": "text=Daarmee staat de analyse. Waar wil je hem naartoe brengen?",
+    "label": "onward.intro (ABSENT for publish-and-advertise: backend onward=[])",
+    "action": "assert absent after channel-plan turn",
+    "expectedResult": "no closing bubble; zero routes so onwardAction undefined"
+  },
+  {
+    "screen": "recruit-onward",
+    "elementId": "onward-self-filter",
+    "selector": "button:has-text(\"Zet je vacature uit\") (publish option)",
+    "label": "publish=self-route filter (ABSENT on this card)",
+    "action": "assert absent",
+    "expectedResult": "no self-link to publish-and-advertise offered"
+  },
+  {
+    "screen": "recruit-onward",
+    "elementId": "onward-not-offered",
+    "selector": "buttons writer/intake/audience/sourcing/convince",
+    "label": "writer/intake/audience/sourcing/convince (ABSENT: backend onward list empty)",
+    "action": "assert absent on publish-and-advertise last step",
+    "expectedResult": "zero onward handoffs; terminal is Channels dashboard not onward block"
+  },
+  {
+    "screen": "recruit-handoff",
+    "elementId": "writer-artifact-cta",
+    "selector": "text=Schrijf nu je vacature",
+    "label": "vacancy-writer-handoff artifact card (only if emitted mid-chat)",
+    "action": "click if present",
+    "expectedResult": "opens WriterHandoff dialog or navigates to writer; NOT authored onward"
+  },
+  {
+    "screen": "recruit-chrome",
+    "elementId": "history-open",
+    "selector": "[data-tour=\"standalone-history\"]",
+    "label": "Geschiedenis",
+    "action": "click",
+    "expectedResult": "RecruitmentHistoryDialog opens scoped {routeId: publish-and-advertise}"
+  },
+  {
+    "screen": "recruit-chrome",
+    "elementId": "history-dialog",
+    "selector": "[data-testid=\"history-show-all\"], input[placeholder=\"Zoek op titel…\"]",
+    "label": "history search + show-all + session rows",
+    "action": "select session",
+    "expectedResult": "restore: re-resolve step; ?sessionId= adopted only with visible content"
+  },
+  {
+    "screen": "recruit-chrome",
+    "elementId": "newchat-open",
+    "selector": "button[aria-label=\"Nieuwe chat\"]",
+    "label": "Nieuwe chat",
+    "action": "click",
+    "expectedResult": "RecruitNewChatChooser dialog opens"
+  },
+  {
+    "screen": "recruit-chrome",
+    "elementId": "newchat-dialog",
+    "selector": "[data-testid=\"new-chat-chooser-options\"] >> [data-testid^=\"new-chat-choice-\"]",
+    "label": "assistant picker cards",
+    "action": "click a choice",
+    "expectedResult": "router.push(choice.href); same-card re-pick resets in place"
+  },
+  {
+    "screen": "recruit-chrome",
+    "elementId": "strategy-cta-pill",
+    "selector": "[data-testid=\"strategy-cta-pill\"]",
+    "label": "Doelgroepanalyse top-bar pill (ABSENT during card)",
+    "action": "assert absent while clarifierActive or after advice",
+    "expectedResult": "hidden until card questions done and no dashboard yet"
+  },
+  {
+    "screen": "recruit-chrome",
+    "elementId": "titlecheck-handoff-offer",
+    "selector": "[data-testid=\"title-check-handoff\"]",
+    "label": "conditional offer when server reports no title verdict",
+    "action": "click if present",
+    "expectedResult": "switches assistantMode to title-check tab"
+  },
+  {
+    "screen": "recruit-loading",
+    "elementId": "loading-chat-thinking",
+    "selector": "text=Aan het denken…, bouncing dots bubble",
+    "label": "isChatStreaming dots / loadingStatus text",
+    "action": "observe during turns",
+    "expectedResult": "dots when loadingStatus empty; status text otherwise"
+  },
+  {
+    "screen": "recruit-loading",
+    "elementId": "loading-advice",
+    "selector": "text=Strategie genereren... + advice panel skeleton",
+    "label": "isAdviceGenerating + skeleton/tabs (dashboard step channel-plan)",
+    "action": "observe when channel-plan turn fires",
+    "expectedResult": "dashboard builds on Channels tab; composer locked; tabs bar appears"
+  },
+  {
+    "screen": "recruit-loading",
+    "elementId": "loading-url-restore",
+    "selector": ".animate-spin (Loader2 fullscreen) / restoring guard",
+    "label": "?sessionId= restore window",
+    "action": "open /recruit?route=publish-and-advertise&sessionId=<id>; observe",
+    "expectedResult": "landing suppressed while restoring; stale session strips param"
+  }
+]

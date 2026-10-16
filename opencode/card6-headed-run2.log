@@ -1,0 +1,8 @@
+﻿[dotenv@17.3.1] injecting env (6) from .env.e2e -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+
+Running 1 test using 1 worker
+
+[dotenv@17.3.1] injecting env (0) from .env.e2e -- tip: ≡ƒöÉ prevent committing .env to code: https://dotenvx.com/precommit
+  ok 1 opencode\card6-functional.spec.ts:95:5 ΓÇ║ [TC-C6-01] Free-chat happy path: dark card to bare /recruit sparring answer (25.4s)
+
+  1 passed (27.0s)
