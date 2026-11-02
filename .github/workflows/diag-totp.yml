@@ -1,0 +1,19 @@
+# TEMPORARY diagnostic workflow — delete after comparing the TOTP secret.
+name: Diag TOTP
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    environment: E2E
+    env:
+      E2E_TOTP_SECRET: ${{ secrets.E2E_TOTP_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Print fixed-timestamp TOTP fingerprint
+        run: node .github/scripts/diag-totp.js
