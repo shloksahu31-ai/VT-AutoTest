@@ -27,6 +27,13 @@ Manual input `cards`:
 The job declares `environment: E2E`, so the secrets must exist on that
 environment (or on the repository, if the environment does not override them):
 
+> **All four secrets must belong to the SAME account and tenant.** A CI run on
+> 2026-11-02 authenticated with `E2E_USERNAME`/`E2E_PASSWORD` of account A
+> while `E2E_TOTP_SECRET` was copied from account B: the password step passed,
+> 2FA rejected every code, and all ten cards failed with "code is not correct".
+> The TOTP secret is per account — never mix it with another account's
+> username/password.
+
 | Secret | Purpose |
 |--------|---------|
 | `E2E_BASE_URL` | Target base URL, e.g. `https://uat-demo.vacaturetovenaar.nl` |
@@ -78,6 +85,9 @@ Key properties:
   sweep.
 - **`STATUS` accumulator.** Any failed card sets `STATUS=1`; the job exits with
   that status after all cards ran. One failing card does not stop the rest.
+- **`set -o pipefail`.** Without it, `npx playwright test ... | tee log` reports
+  `tee`'s exit code, so every card could fail while the job still showed green
+  (observed 2026-11-02: 10 failed cards, `OVERALL_STATUS=0`). Do not remove it.
 - **`timeout-minutes: 300`.** A full sweep takes ~25–30 minutes, but AI
   terminals can stall; the 5-hour ceiling leaves room for retries and slow
   cards.

@@ -155,19 +155,38 @@ async function handle2FA(page: Page) {
       }
     } catch (_) {}
 
-    // Wait for redirect away from 2FA page
+    // Wait for redirect away from 2FA page, but surface a rejected code
+    // immediately instead of burning 30s on a waitForURL timeout.
     console.log('[AUTH-2FA] Waiting for post-2FA redirect...');
-    await page.waitForURL(
-      (url) => {
-        const path = url.toString();
-        return !path.includes('/login') && 
-               !path.includes('/verify') && 
-               !path.includes('/2fa') && 
-               !path.includes('/otp') &&
-               !path.includes('/mfa');
-      },
-      { timeout: 30_000 }
-    );
+    const rejected = page
+      .locator('[role="alert"]')
+      .filter({
+        hasText: /code (?:klopt niet|is not correct)|incorrect|ongeldig|invalid/i,
+      })
+      .first();
+    const deadline = Date.now() + 30_000;
+    let passed = false;
+    while (Date.now() < deadline) {
+      if (await rejected.isVisible().catch(() => false)) {
+        const text = ((await rejected.innerText().catch(() => '')) || '').trim();
+        throw new Error(
+          `[AUTH-2FA] The app rejected the TOTP code: ${text.slice(0, 200)}. ` +
+            'E2E_TOTP_SECRET must belong to the same account as E2E_USERNAME ' +
+            '(check the CI environment secrets) and the machine clock must be correct.',
+        );
+      }
+      if (!/\/(login|verify|2fa|otp|mfa)/.test(page.url())) {
+        passed = true;
+        break;
+      }
+      await page.waitForTimeout(500);
+    }
+    if (!passed) {
+      throw new Error(
+        '[AUTH-2FA] Still on the 2FA page 30s after submitting the code ' +
+          '(the code was probably rejected; no alert was detected).',
+      );
+    }
     console.log('[AUTH-2FA] ✅ 2FA verification passed');
   });
 }

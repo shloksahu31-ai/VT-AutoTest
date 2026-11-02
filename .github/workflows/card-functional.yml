@@ -40,35 +40,14 @@ jobs:
             if [ -z "${!v}" ]; then echo "$v is MISSING"; else echo "$v is present"; fi
           done
 
-      - name: Typecheck card specs
-        run: |
-          npx tsc --ignoreConfig --noEmit --strict --esModuleInterop --skipLibCheck \
-            --ignoreDeprecations 6.0 --types node --module commonjs \
-            --target esnext --moduleResolution node \
-            opencode/card1-option1-functional.spec.ts \
-            opencode/card1-option2-functional.spec.ts \
-            opencode/card2-functional.spec.ts \
-            opencode/card3-option1-functional.spec.ts \
-            opencode/card3-option2-functional.spec.ts \
-            opencode/card4-functional.spec.ts \
-            opencode/card5-functional.spec.ts \
-            opencode/card6-option1-functional.spec.ts \
-            opencode/card6-option2-functional.spec.ts \
-            opencode/card6-option3-functional.spec.ts \
-            opencode/helpers/auth-guard.ts \
-            opencode/helpers/hydration.ts \
-            opencode/helpers/scroll-click.ts \
-            opencode/helpers/ai-wait.ts \
-            opencode/helpers/test-data.ts \
-            opencode/helpers/pill-loop.ts \
-            opencode/helpers/failure-shot.ts \
-            opencode/helpers/step-log.ts \
-            opencode/helpers/locale.ts \
-            opencode/helpers/session.ts \
-            opencode/helpers/consent.ts
+      - name: Typecheck (tsconfig covers e2e/ + opencode/)
+        run: npx tsc --noEmit
 
       - name: Run card specs (fresh login before each card)
         run: |
+          # pipefail: without it, `cmd | tee` reports tee's exit code and a
+          # failing card would still leave OVERALL_STATUS=0 (observed 2026-11-02).
+          set -o pipefail
           CARDS="${{ inputs.cards }}"
           if [ "$CARDS" = "all" ] || [ -z "$CARDS" ]; then
             CARDS="card1-option1,card1-option2,card2,card3-option1,card3-option2,card4,card5,card6-option1,card6-option2,card6-option3"

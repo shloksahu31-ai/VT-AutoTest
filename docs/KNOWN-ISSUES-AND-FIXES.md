@@ -196,6 +196,26 @@ tolerant. Assertions still target English only.
 - **Guidance:** treat the `[RESULT]` lines and the final
   `Overall: 🎉 ALL CARDS PASSED` as authoritative; see `docs/RUNBOOK.md`.
 
+### 8.5 CI reported success while every card failed (2026-11-02)
+
+- **Symptom:** the GitHub Actions run was green, but the artifact logs showed
+  `1 failed` for all ten cards and `OVERALL_STATUS=0`.
+- **Root cause:** the run step used `npx playwright test ... | tee log` without
+  `set -o pipefail`, so `$?` was `tee`'s status (always 0) and `|| STATUS=1`
+  never fired.
+- **Fix:** `set -o pipefail` added at the top of the step. The step now fails
+  when any card fails, even though it still runs all cards.
+- **Second root cause of the failures themselves:** the `E2E` environment had
+  `E2E_USERNAME`/`E2E_PASSWORD` for one account but no `E2E_TOTP_SECRET`; the
+  secret was then copied from a *different* account. Password login succeeded,
+  every TOTP code was rejected ("Deze code klopt niet"). All four `E2E_*`
+  secrets must belong to the same account.
+- **Diagnostic used:** a throwaway workflow printed a TOTP for a fixed past
+  timestamp (`1700000000000`) from the CI secret; comparing that with the local
+  value proved the secret was identical, which ruled out encryption/masking and
+  pointed at the account mismatch (the 2FA page showed a different account
+  email). The workflow was deleted after use.
+
 ---
 
 ## 9. Card 1 Option 1 — gate and consent
