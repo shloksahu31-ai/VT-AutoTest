@@ -1,24 +1,32 @@
 {
   "name": "vacature-tovenaar-testing",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Playwright E2E suite for the Vacature Tovenaar product cards (10 specs, English UI, self-healing auth).",
+  "main": "opencode/run-all-cards.js",
   "scripts": {
-    "test": "npx playwright test",
-    "test:ui": "npx playwright test --ui",
-    "report": "npx playwright show-report"
+    "test": "node opencode/run-all-cards.js",
+    "report": "npx playwright show-report",
+    "e2e:setup": "npx playwright test --project=setup --reporter=list",
+    "e2e:cards": "node opencode/run-all-cards.js",
+    "e2e:coverage": "npx tsx opencode/assertions/coverage.ts",
+    "e2e:lint": "npx tsx opencode/assertions/lint.ts",
+    "e2e:observations": "npx tsx opencode/assertions/observations.ts",
+    "e2e:check": "npm run e2e:lint && npm run e2e:coverage"
   },
-  "keywords": [],
+  "keywords": [
+    "playwright",
+    "e2e",
+    "vacature-tovenaar"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@google/generative-ai": "^0.24.1",
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0",
-    "@types/pg": "^8.20.0",
     "dotenv": "^17.3.1",
-    "pg": "^8.20.0",
+    "otpauth": "^9.5.1",
+    "tsx": "^4.20.6",
     "typescript": "^6.0.2"
   }
 }

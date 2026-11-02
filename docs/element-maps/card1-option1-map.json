@@ -1,0 +1,295 @@
+{
+  "flow": "Card 1 Option 1 (Met Intake)",
+  "baseUrl": "https://uat-demo.vacaturetovenaar.nl",
+  "timestamp": "2026-09-30T05:29:04.427Z",
+  "workflowId": "cmunnubxz02yyex17elvfyife",
+  "verifiedCount": "12/13",
+  "uncertainAnswers": {
+    "submitAnywayBypassInSheet": "NO bypass exists live: no Toch-verzenden/Submit-Anyway button (visible=false); Start voorbereiding disabled=true opacity=0.55 until company+jobTitle+location filled, then enabled. Confirms static code finding.",
+    "emptyBriefSubmit": "Intake-voorbereiden button is ENABLED even with empty textarea (disabled=false, no disabled attr). Landing has NO disabled attr as mapped; empty submit opens sheet (sheet itself enforces required fields).",
+    "waitForSummaryRouteGate": "Gate = questions-ready, NOT all-answered. Door-naar-schrijven disabled while questions generating (first-run TimeoutError + disabled=true probe), enables with 20 antwoorden still open (screenshot badge 20 antwoord nodig). No Overslaan/continue-without link exists. Click advances in-app phase 2->3 (URL unchanged), exposing Finalize + Schrijf-de-vacature CTA.",
+    "accordionEscapeBlur": "Escape inside expanded accordion moved focus out of textarea (activeElement=BUTTON:Mijn prompts). Blur-on-Escape verified live.",
+    "scroll700ms": "Manual scrollBy(500) + 900ms settle then scrollTo(0) ok; total probe 1820ms. 700ms smooth-scroll waits adequate; used 800-900ms waits throughout without flake."
+  },
+  "steps": [
+    {
+      "name": "01-dashboard",
+      "url": "https://uat-demo.vacaturetovenaar.nl/",
+      "elements": [
+        "main",
+        "a[href*=/choose/writeVacancy] visible=true"
+      ],
+      "transitions": [
+        "click Card1 CTA -> /choose/writeVacancy"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\01-dashboard.png"
+    },
+    {
+      "name": "02-choose",
+      "url": "https://uat-demo.vacaturetovenaar.nl/choose/writeVacancy",
+      "elements": [
+        "[data-option=withIntake] visible=true",
+        "href=/intake",
+        "text=MET INTAKE | Ja, ik kan informatie ophalen | Ik zet de doelgroepdata om in concrete vragen die je kunt mailen of meenemen naar het gesprek. Daarna schrijven we de vacaturetekst met zijn antwoorden erbij. | "
+      ],
+      "transitions": [
+        "click withIntake -> /intake landing"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\02-choose-writeVacancy.png"
+    },
+    {
+      "name": "03-intake-landing",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake",
+      "elements": [
+        "textarea visible=true",
+        "Intake-voorbereiden visible=true",
+        "disabled attr=null prop=false",
+        "empty brief -> button disabled=false, disabledAttr=null"
+      ],
+      "transitions": [
+        "fill brief -> click Intake voorbereiden opens sheet"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\03-intake-landing.png"
+    },
+    {
+      "name": "04-sheet-open",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake",
+      "elements": [
+        "sheet visible=true",
+        "sheet text=Nieuwe intake | Eerst de essentials, daarna start de voorbereiding. | Bedrijf | * | Kies een bedrijf | Functie | * | Uit geplakte tekst halen… | Locatie | * | Uit geplakte tekst halen… | Vacaturetype | * | Kies een type | Taal | 🇳🇱 | Nederlands | \ud83c",
+        "Start-voorbereiding visible=true disabled=true opacity=0.55",
+        "Submit-Anyway visible=false"
+      ],
+      "transitions": [
+        "fill required fields -> Start voorbereiding enabled"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\04-workflow-sheet.png"
+    },
+    {
+      "name": "04b-sheet-filled",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake",
+      "elements": [
+        "Start disabled after fill=false",
+        "comboboxes=2",
+        "textInputs=2"
+      ],
+      "transitions": [
+        "click Start voorbereiding -> /intake?workflowId="
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\04b-sheet-filled.png"
+    },
+    {
+      "name": "05-analyzing",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake?workflowId=cmunnubxz02yyex17elvfyife",
+      "elements": [
+        "workflowId=cmunnubxz02yyex17elvfyife",
+        "analyzing markers visible=true",
+        "body=SS | Intake-assistent | Zoek vacatures, persona's… | Ctrl K | NL | Briefing wordt gelezen… | Velden ophalen en gaps vinden. | Nog 2:00 | Meestal 1-2 min | Briefing lezen | Context begrijpen om gericht onderzoek te kunnen doen. | Marktonderzoek | Actu"
+      ],
+      "transitions": [
+        "SSE analysis streams -> brief/hiring-manager phases"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\05-analyzing.png"
+    },
+    {
+      "name": "06-brief",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake?workflowId=cmunnubxz02yyex17elvfyife",
+      "elements": [
+        "active hydration ok=true via [data-tour=\"intake-stepper\"]",
+        "stepper=1 | Informatie-check | 2 | Intakevragen genereren | 3 | Vacature schrijven | Intake delen",
+        "scroll: smooth-scroll settle ok in 1820ms (700ms wait adequate)"
+      ],
+      "transitions": [
+        "Intakevragen maken -> question generation"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\06-brief-active-intake.png"
+    },
+    {
+      "name": "07-questions",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake?workflowId=cmunnubxz02yyex17elvfyife",
+      "elements": [
+        "questions generated: numbered accordion buttons confirmed live (probe listed 20+ \"N | ...\" question buttons)",
+        "4 delivery channel CARDS with exact labels: [Mail de vragen] [Typ mee tijdens het gesprek] [Plak een gespreksopname] [Plak je aantekeningen] (= mail/manual/transcript/notes; NOT Gesprek/Formulier tabs)",
+        "copy actions: Kopieren + Download als Word visible",
+        "mail Versturen disabled until HM name/email (observed disabled=true)",
+        "Escape-blur probe: Escape pressed inside accordion, activeElement=BUTTON:Mijn prompts (focus left textarea = blur ok)",
+        "external Submit-Form vs Submit-Anyway: no Submit-Anyway button anywhere; only contextual Versturen"
+      ],
+      "transitions": [
+        "continue-without / finalize -> summary"
+      ],
+      "status": "verified",
+      "note": "screenshot 07-hiring-manager-questions.png"
+    },
+    {
+      "name": "fatal",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake?workflowId=cmunnubxz02yyex17elvfyife",
+      "elements": [
+        "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Overslaan en vacature schrijven\"), button:has-text(\"Direct afronden\"), button:has-text(\"Afronden\"), button:has-text(\"Samenvatten\"), button:has-text(\"Vacature schrijven\")').first()\u001b[22m\n\u001b[2m"
+      ],
+      "transitions": [],
+      "status": "blocked",
+      "note": "SUPERSEDED: first-run encounter of disabled summary gate (button disabled while questions still generating). Resume run proved gate enables later. Kept as gate evidence."
+    },
+    {
+      "name": "07b-manual-answers",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake?workflowId=cmunnubxz02yyex17elvfyife",
+      "elements": [
+        "accordion regex did NOT match (button text contains newlines); 0 answers actually filled - selector miss, recorded honestly",
+        "KEY FINDING: Door-naar-schrijven flipped disabled true->false WITHOUT any answers given (after visiting Typ-mee channel + question-gen settling)",
+        "no skip / continue-without / Overslaan link exists (skipVisible=false)"
+      ],
+      "transitions": [
+        "gate enables on questions-ready, NOT on all-answered -> click Door naar schrijven"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\07b-manual-answers.png"
+    },
+    {
+      "name": "08-summary",
+      "url": "https://uat-demo.vacaturetovenaar.nl/intake?workflowId=cmunnubxz02yyex17elvfyife",
+      "elements": [
+        "SCREENSHOT-PROVEN Finalize phase: stepper 1 Informatie-check done, 2 Intakevragen genereren done, 3 Vacature schrijven ACTIVE",
+        "header Finalize: Bekijk de volledige briefing en schrijf de vacature of sla op en sluit af",
+        "CTA Schrijf de vacature -> (orange) + Opslaan en afsluiten visible",
+        "briefing recap: Medewerker Klantenservice, Rijkswaterstaat Regulier Utrecht; 5/28 ingevuld; badge 20 antwoord nodig (gate allows proceeding with open answers)",
+        "transition: clicked Door-naar-schrijven on step-2 view, phase advanced 2->3, URL stayed /intake?workflowId= (phase is in-app state)"
+      ],
+      "transitions": [
+        "Continue/summary CTA -> /vacancy-writer?workflowId=&generate=1"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\08-summary.png"
+    },
+    {
+      "name": "09-writer",
+      "url": "https://uat-demo.vacaturetovenaar.nl/vacancy-writer?workflowId=cmunnubxz02yyex17elvfyife&sessionId=cmunnybt3032dex17x2o9p4v1",
+      "elements": [
+        "reached Vacatureschrijver via direct nav /vacancy-writer?workflowId=<id>&generate=1; app normalized URL (added sessionId, consumed generate param)",
+        "SCREENSHOT-PROVEN generation running: Je vacature wordt geschreven... 4%, Nog 1:55, pipeline Intake doorlezen / Doelgroep matchen / Vacaturetekst opbouwen / Klaarzetten in de editor",
+        "left Vacaturechat pane + right Vacature canvas pane rendered; header chips Rijkswaterstaat / Regulier / Volledig herschrijven / Diep"
+      ],
+      "transitions": [
+        "writer done -> /recruit?workflowId= (STOP)"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\09-vacancy-writer.png"
+    },
+    {
+      "name": "10-recruit-STOP",
+      "url": "https://uat-demo.vacaturetovenaar.nl/recruit?workflowId=cmunnubxz02yyex17elvfyife&sessionId=cmunnvtib02zuex17e99pqlsu",
+      "elements": [
+        "SCOPE END: /recruit?workflowId=<id> renders Arbeidsmarkt Assistent chat",
+        "SCREENSHOT-PROVEN advice generating: Vereisten in kaart brengen... Nog 0:58, context bubble Medewerker Klantenservice"
+      ],
+      "transitions": [
+        "STOP"
+      ],
+      "status": "verified",
+      "note": "C:\\Users\\shlok\\Desktop\\Work\\Vacature Tovenaar\\vacature-tovenaar-testing\\e2e\\results\\card1-option1\\10-recruit-advice.png"
+    }
+  ],
+  "consoleLogs": [
+    "[error] Failed to load resource: the server responded with a status of 401 ()",
+    "[error] [Auth API] Request failed: {status: 401, data: Object}",
+    "[error] [Login] Error: {status: 401, message: Two-factor authentication required. Enter the code from your authenticator app (or a recovery code)., requiresTwoFactor: true, userId: 98}",
+    "[log] [Auth API] setTokens called - tokens are now managed via httpOnly cookies",
+    "[log] [API] GET /api/network/events",
+    "[log] [API] GET /api/network/available",
+    "[log] [API] GET /api/recruitment-advice/routes",
+    "[log] [API] GET /api/recruitment-advice/routes",
+    "[log] [API] GET /api/tenants/uat-demo/language?clientSessionId=c3629a89-a0a9-4a2e-b28d-00c7ead32def",
+    "[log] [API] GET /api/agency/workflows",
+    "[log] [API] GET /api/recruitment-advice/sessions",
+    "[log] [API] GET /api/intake-v2/sessions?scope=standalone&limit=100",
+    "[log] [API] GET /api/network/available -> 200 (328ms)",
+    "[warning] [SSE] Connection error — will retry (attempt 1)",
+    "[error] [Notifications] Failed to fetch: TypeError: Failed to fetch\n    at https://uat-demo.vacaturetovenaar.nl/_next/static/chunks/eb7da4e737c8e906.js:1:3730\n    at https://uat-demo.vacaturetovenaar.nl/_next",
+    "[error] [Notifications] Failed to fetch unread count: TypeError: Failed to fetch\n    at https://uat-demo.vacaturetovenaar.nl/_next/static/chunks/eb7da4e737c8e906.js:1:4282\n    at https://uat-demo.vacaturetove",
+    "[log] [API] GET /api/tenants/uat-demo/language?clientSessionId=281daaa6-8647-4345-9d18-c27c514b8313",
+    "[log] [API] GET /api/tenants/uat-demo/language?clientSessionId=281daaa6-8647-4345-9d18-c27c514b8313 -> 200 (387ms)",
+    "[log] [API] GET /api/network/events",
+    "[log] [API] GET /api/network/available",
+    "[log] [API] GET /api/recruitment-advice/routes",
+    "[log] [API] GET /api/recruitment-advice/routes",
+    "[log] [API] GET /api/agency/workflows",
+    "[log] [API] GET /api/recruitment-advice/sessions",
+    "[log] [API] GET /api/intake-v2/sessions?scope=standalone&limit=100",
+    "[log] [API] GET /api/network/available -> 200 (369ms)",
+    "[log] [API] GET /api/network/events -> 200 (372ms)",
+    "[log] [API] GET /api/intake-v2/sessions?scope=standalone&limit=100 -> 200 (433ms)",
+    "[log] [API] GET /api/recruitment-advice/routes -> 200 (539ms)",
+    "[log] [API] GET /api/agency/workflows -> 200 (905ms)",
+    "[log] [API] GET /api/recruitment-advice/routes -> 200 (914ms)",
+    "[log] [API] GET /api/recruitment-advice/sessions -> 200 (918ms)",
+    "[log] [API] GET /api/recruitment-advice/routes",
+    "[log] [API] GET /api/intake-v2/sessions?scope=all&limit=20",
+    "[log] [API] GET /api/intake-v2/sessions?scope=all&limit=20",
+    "[log] [API] GET /api/agency/workflows",
+    "[log] [API] GET /api/recruitment-advice/sessions",
+    "[log] [API] GET /api/intake-v2/sessions?scope=standalone&limit=100",
+    "[log] [API] GET /api/intake-v2/sessions?scope=standalone&limit=100 -> 200 (381ms)",
+    "[log] [API] GET /api/recruitment-advice/routes -> 200 (426ms)",
+    "[log] [API] GET /api/recruitment-advice/sessions -> 200 (546ms)",
+    "[log] [API] GET /api/agency/workflows -> 200 (826ms)",
+    "[log] [API] GET /api/intake-v2/sessions?scope=all&limit=20 -> 200 (2637ms)",
+    "[log] [API] GET /api/tenant-admin/companies/list",
+    "[log] [API] GET /api/tenants/vacancy-types",
+    "[log] [API] POST /api/chat-service/workflow/extract-details",
+    "[log] [API] GET /api/intake-v2/sessions?scope=all&limit=20 -> 200 (2885ms)",
+    "[log] [API] GET /api/tenants/vacancy-types -> 200 (606ms)",
+    "[log] [API] GET /api/tenant-admin/companies/list -> 200 (920ms)",
+    "[warning] Select is changing from uncontrolled to controlled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifeti",
+    "[warning] Select is changing from uncontrolled to controlled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifeti",
+    "[log] [API] POST /api/intake-v2/prefetch-market",
+    "[log] [API] POST /api/intake-v2/prefetch-market -> 202 (694ms)",
+    "[log] [API] POST /api/chat-service/workflow/extract-details -> 200 (5252ms)",
+    "[log] [API] POST /api/chat-service/workflow/validate-input",
+    "[log] [API] POST /api/chat-service/workflow/validate-input -> 200 (2097ms)",
+    "[log] [API] POST /api/agency/workflows",
+    "[log] [API] POST /api/agency/workflows -> 201 (818ms)",
+    "[log] [API] GET /api/recruitment-advice/routes",
+    "[log] [API] GET /api/tenants/vacancy-types",
+    "[log] [API] GET /api/agency/workflows/cmunnubxz02yyex17elvfyife",
+    "[log] [API] GET /api/intake/workflow/cmunnubxz02yyex17elvfyife/submissions",
+    "[log] [API] GET /api/agency/workflows",
+    "[log] [API] GET /api/recruitment-advice/sessions",
+    "[log] [API] GET /api/intake-v2/sessions?scope=standalone&limit=100",
+    "[log] [API] GET /api/tenants/vacancy-types -> 200 (358ms)",
+    "[log] [API] GET /api/intake-v2/sessions?scope=standalone&limit=100 -> 200 (453ms)",
+    "[log] [API] GET /api/recruitment-advice/routes -> 200 (463ms)",
+    "[log] [API] GET /api/agency/workflows/cmunnubxz02yyex17elvfyife -> 200 (473ms)",
+    "[log] [API] POST /api/intake-v2/session/create",
+    "[log] [API] GET /api/recruitment-advice/sessions -> 200 (520ms)",
+    "[log] [API] GET /api/intake/workflow/cmunnubxz02yyex17elvfyife/submissions -> 200 (611ms)",
+    "[log] [API] GET /api/agency/workflows -> 200 (718ms)",
+    "[log] [API] POST /api/intake-v2/session/create -> 200 (672ms)",
+    "[log] [API] GET /api/pay-silence/intakes/cmunnud5t02z5ex17divmg0t3?language=nl",
+    "[log] [API] POST /api/intake-v2/chat/stream/async",
+    "[log] [API] GET /api/pay-silence/intakes/cmunnud5t02z5ex17divmg0t3?language=nl -> 200 (396ms)",
+    "[log] [API] POST /api/intake-v2/chat/stream/async -> 202 (762ms)",
+    "[log] [API] GET /api/agency/workflows",
+    "[log] [API] GET /api/agency/workflows -> 200 (634ms)",
+    "[log] [API] GET /api/agency/workflows",
+    "[log] [API] GET /api/agency/workflows -> 200 (543ms)",
+    "[log] [API] GET /api/pay-silence/intakes/cmunnud5t02z5ex17divmg0t3?language=nl",
+    "[log] [API] GET /api/pay-silence/intakes/cmunnud5t02z5ex17divmg0t3?language=nl -> 200 (318ms)",
+    "[log] [API] GET /api/recruitment-advice/sessions",
+    "[log] [API] GET /api/recruitment-advice/sessions -> 200 (352ms)",
+    "[log] [API] POST /api/recruitment-advice/route",
+    "[log] [API] POST /api/recruitment-advice/route -> 200 (550ms)",
+    "[log] [API] POST /api/recruitment-advice/generate/stream",
+    "[log] [API] POST /api/recruitment-advice/generate/stream -> 202 (613ms)",
+    "[log] [API] GET /api/saved-prompts",
+    "[log] [API] GET /api/saved-prompts -> 200 (322ms)",
+    "[log] [API] GET /api/agency/workflows",
+    "[log] [API] GET /api/agency/workflows -> 200 (651ms)"
+  ]
+}

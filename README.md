@@ -1,67 +1,85 @@
-# Vacature Tovenaar Test Automation (UAT)
+# Vacature Tovenaar — Card E2E Suite (10 specs)
 
-This repository contains the stabilized end-to-end (E2E) testing framework for the Vacature Tovenaar platform on UAT environments.
+Playwright end-to-end suite for the ten Vacature Tovenaar product cards, run
+against the **English** UAT UI with **self-healing authentication** (every card
+logs itself in when the saved session is missing or expired).
 
-## 🌟 E2E Golden Baseline (v1.0)
-This project follows a strict **"Golden Baseline"** protocol verified by browser extension recording on 2026-04-01.
+> Status: all 10 specs verified green against UAT (2026-11-02). See
+> [`docs/HANDOVER.md`](docs/HANDOVER.md) for the full handover.
 
-- **[PROTECTED POLICY](file:///c:/Users/shlok/Desktop/Work/Vacature%20Tovenaar/vacature-tovenaar-testing/e2e/Knowledge%20items/GOLDEN_BASELINE_POLICY.md)**: "Logic should never be removed."
-- **[MASTER NAVIGATION PROMPT](file:///c:/Users/shlok/Desktop/Work/Vacature%20Tovenaar/vacature-tovenaar-testing/e2e/Knowledge%20items/MASTER_E2E_FLOW_PROMPT.md)**: Definitive guide for E2E flow navigation (NL & EN).
-- **[Dutch Baseline](file:///c:/Users/shlok/Desktop/Work/Vacature%20Tovenaar/vacature-tovenaar-testing/e2e/Knowledge%20items/BASELINE_RECORDED_FLOW.md)** | **[English Baseline](file:///c:/Users/shlok/Desktop/Work/Vacature%20Tovenaar/vacature-tovenaar-testing/e2e/Knowledge%20items/BASELINE_RECORDED_FLOW_EN.md)**
-- **[Original User Instructions](file:///c:/Users/shlok/Desktop/Work/Vacature%20Tovenaar/vacature-tovenaar-testing/e2e/Knowledge%20items/ORIGINAL_USER_INSTRUCTIONS.md)**
+## The ten specs
 
----
+| # | Card | Spec | Config |
+|---|------|------|--------|
+| 1 | Card 1 — Option 1 (With Intake) | `opencode/card1-option1-functional.spec.ts` | `opencode/playwright.card1-option1.config.ts` |
+| 2 | Card 1 — Option 2 (Write Directly) | `opencode/card1-option2-functional.spec.ts` | `opencode/playwright.card1-option2.config.ts` |
+| 3 | Card 2 — Diagnose | `opencode/card2-functional.spec.ts` | `opencode/playwright.card2.config.ts` |
+| 4 | Card 3 — Option 1 (Sourcing) | `opencode/card3-option1-functional.spec.ts` | `opencode/playwright.card3-option1.config.ts` |
+| 5 | Card 3 — Option 2 (Publish) | `opencode/card3-option2-functional.spec.ts` | `opencode/playwright.card3-option2.config.ts` |
+| 6 | Card 4 — Target group | `opencode/card4-functional.spec.ts` | `opencode/playwright.card4.config.ts` |
+| 7 | Card 5 — Convince | `opencode/card5-functional.spec.ts` | `opencode/playwright.card5.config.ts` |
+| 8 | Card 6 — Option 1 (Sparring) | `opencode/card6-option1-functional.spec.ts` | `opencode/playwright.card6-option1.config.ts` |
+| 9 | Card 6 — Option 2 (Job Title Check) | `opencode/card6-option2-functional.spec.ts` | `opencode/playwright.card6-option2.config.ts` |
+| 10 | Card 6 — Option 3 (Target-group analysis) | `opencode/card6-option3-functional.spec.ts` | `opencode/playwright.card6-option3.config.ts` |
 
-## 🚀 Getting Started
-This is the standalone end-to-end (E2E) testing framework for Vacature Tovenaar. It runs via Playwright and is fully detached from the main application codebase.
+## Quick start (Windows / PowerShell)
 
-## 🚀 Running Tests Locally Before Pushing to UAT
+```powershell
+cd "C:\Users\shlok\Desktop\Work\Vacature Tovenaar\vacature-tovenaar-testing"
 
-You should always verify your Playwright tests locally against your development environment before merging changes that will be executed in UAT.
+npm ci                                   # once
+copy .env.e2e.example .env.e2e           # then fill in real values
 
-### 1. Configure the Local Environment
-
-First, create a local environment file. Playwright looks for `.env.e2e` defined in `playwright.config.ts`.
-
-Copy the example file to create your active `.env.e2e`:
-```bash
-cp .env.e2e.example .env.e2e
+npm run e2e:setup                        # optional auth warm-up
+npm run e2e:cards                        # all 10 cards, sequential
+node opencode/run-all-cards.js card5     # one card (or a prefix: card6)
 ```
 
-Open `.env.e2e` and update the values to point to your local development servers:
+Run a single card directly:
 
-```env
-# E2E_BASE_URL should point to the frontend you are testing
-E2E_BASE_URL=http://localhost:3000  # or http://rws.localhost:9002 for studio
-
-# The credentials of test users you seeded locally
-E2E_USERNAME=superadmin@platform.local
-E2E_PASSWORD=superadmin123
+```powershell
+.\node_modules\.bin\playwright test -c opencode/playwright.card6-option2.config.ts
 ```
 
-*(Note: Ensure your local Studio, Admin, and Backend servers are actually running before trying to test them!)*
+Quality gates:
 
-### 2. Run the Tests
-
-You can use the built-in npm scripts to trigger the tests:
-
-```bash
-# Run all tests headlessly
-npm run test
-
-# Run tests with the Playwright UI (highly recommended for local debugging!)
-npm run test:ui
-
-# Run only a specific project/suite
-npx playwright test --project=auth
+```powershell
+npm run e2e:check     # lint + assertion coverage
+npx tsc --noEmit      # typecheck the whole suite
 ```
 
-### 3. Debugging Failing Tests
+## Where everything lives
 
-If a test fails or times out, Playwright will automatically save screenshots and traces into the `playwright-report/` directory.
-
-To view the report interactively:
-```bash
-npm run report
+```
+opencode/                    the 10 specs + 10 configs + helpers + assertions
+opencode/helpers/            shared step logging, auth, locale, waits, pill loop
+opencode/assertions/         assertion catalogue (registry), coverage, lint
+e2e/tests/global-setup.ts    one-time auth warm-up (optional)
+e2e/helpers/                 auth / TOTP / config / stabilization used by setup
+docs/                        handover, runbook, editing guide, card map, history
+docs/element-maps/           verified live element maps (reference snapshots)
 ```
 
+## Documentation
+
+| Document | Contents |
+|----------|----------|
+| [`docs/HANDOVER.md`](docs/HANDOVER.md) | Master handover: status, decisions, next steps |
+| [`docs/RUNBOOK.md`](docs/RUNBOOK.md) | Install, env, run, CI, troubleshooting |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | How the suite is put together |
+| [`docs/EDITING-GUIDE.md`](docs/EDITING-GUIDE.md) | How to change/fix/extend specs safely |
+| [`docs/AUTH-AND-LOCALE.md`](docs/AUTH-AND-LOCALE.md) | Session lifecycle, TOTP, EN forcing |
+| [`docs/CARD-MAP.md`](docs/CARD-MAP.md) | Per-card route, terminal, key labels, assertions |
+| [`docs/KNOWN-ISSUES-AND-FIXES.md`](docs/KNOWN-ISSUES-AND-FIXES.md) | Every defect fixed, with root cause |
+| [`docs/CI.md`](docs/CI.md) | GitHub Actions workflow and secrets |
+| [`docs/CLEANUP-LOG.md`](docs/CLEANUP-LOG.md) | What was removed, backup + restore |
+| [`docs/TEST-DATA.md`](docs/TEST-DATA.md) | Generated data and test isolation |
+| `opencode/HOW-TO-RUN-*.md` | Per-card run instructions |
+| `opencode/*-tally.md` | Per-card assertion tallies (what is checked where) |
+
+## Security
+
+`.env.e2e` holds the demo account password and the TOTP secret. It is
+gitignored — never commit it or paste its contents into logs, issues, or CI
+output. Step logs are secret-safe by design (`safeUrl()` truncates session and
+workflow IDs).

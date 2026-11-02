@@ -23,7 +23,10 @@ const KILL_TOURS_CSS = `
   .react-joyride__beacon,
   .react-joyride__tooltip,
   .shepherd-element,
-  .shepherd-modal-overlay-container {
+  .shepherd-modal-overlay-container,
+  div[role="dialog"]:has(#vt-intro-title),
+  div:has(> #vt-intro-title),
+  svg[style*="vtIntroDash"] {
     display: none !important;
     visibility: hidden !important;
     pointer-events: none !important;
@@ -50,6 +53,13 @@ const KILL_TOURS_CSS = `
 export async function injectStabilization(page: Page) {
   await page.addInitScript((css: string) => {
     if (typeof window === 'undefined') return;
+    try {
+      // Mark WhatsNew modal as seen for all possible user IDs
+      const map: Record<string, boolean> = { all: true };
+      for (let i = 1; i <= 50; i++) map[String(i)] = true;
+      window.localStorage.setItem('vt_v2_whats_new_v1', JSON.stringify(map));
+    } catch (_) {}
+
     const inject = () => {
       if (!document.head || document.getElementById('e2e-kill-tours')) return;
       const style = document.createElement('style');

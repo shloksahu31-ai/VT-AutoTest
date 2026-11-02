@@ -1,14 +1,28 @@
+# Dependencies / build output
 node_modules/
+package-lock.json.bak
+
+# Secrets — never commit the real env file
 .env*
 !.env.e2e.example
+
+# Runtime auth state and reports
 e2e/fixtures/.auth-state.json
+e2e/fixtures/.staging-auth-state.json
+e2e/results/artifacts/
+e2e/results/card*/
+e2e/results/observations/
+e2e/results/*.json
+e2e/results/*.png
 test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
-error.log
-*.zip
-extracted_files/
-.vscode/
-.idea/
-CLAUDE.md
+
+# Card-suite run artefacts
+opencode/test-results*/
+opencode/logs/
+opencode/observations/
+opencode/*.log
+opencode/*.png
+opencode/all-cards-execution-report.md

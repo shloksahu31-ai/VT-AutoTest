@@ -10,7 +10,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "resolveJsonModule": true,
+    "ignoreDeprecations": "6.0"
   },
-  "include": ["e2e/**/*", "playwright.config.ts"]
+  "include": ["e2e/**/*", "opencode/**/*", "playwright.config.ts"],
+  "exclude": ["node_modules", "e2e/results", "opencode/test-results*"]
 }
