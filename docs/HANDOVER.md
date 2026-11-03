@@ -34,6 +34,7 @@ Every spec runs against the **English UI only**. There is no Dutch variant.
 | `npm run e2e:lint` | 73 findings, budget 189 — OK |
 | `npm run e2e:coverage` | 65 of 89 catalogue entries tagged, 4 open |
 | Live UAT runs | all 10 green (verified individually and in batches) |
+| GitHub Actions full sweep | **green** — 10/10 cards, 25.3 min, [run 41546796353](https://github.com/shloksahu31-ai/VT-AutoTest/actions/runs/41546796353) |
 
 Observed runtimes (single worker, cold auth):
 
@@ -187,5 +188,5 @@ Restore instructions and the exact deletion list are in
 - [x] CI workflow updated for the 10-card list
 - [x] Legacy files removed; backup taken
 - [x] Documentation written (`docs/` + `README.md`)
-- [ ] Commit the cleaned tree (recommended next action)
-- [ ] Optional: run one full sweep in a single pass for a combined report
+- [x] Commit the cleaned tree
+- [x] Full 10-card sweep in a single CI pass (run 41546796353, 25.3 min, 10/10 green)
